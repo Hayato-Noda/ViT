@@ -5,7 +5,7 @@ import torch.nn.functional as F
 from einops import rearrange, repeat
 from einops.layers.torch import Rearrange
 
-from layers.AttentionLayer import PreNorm, FeedForward
+from model.layers.AttentionLayer import PreNorm, FeedForward
 
 class Attention(nn.Module):
     def __init__(self, dim, heads = 8, dim_head = 64, dropout = 0.):
@@ -54,8 +54,19 @@ class Transformer(nn.Module):
 
 class ViT(nn.Module):
     def __init__(
-        self, *, image_size, patch_size, num_classes, dim, depth, heads, mlp_dim, pool = 'cls', 
-        channels = 3, dim_head = 64, dropout = 0., emb_dropout = 0.):
+        self, 
+        *, 
+        image_size, 
+        patch_size, 
+        num_classes,
+        dim, depth, 
+        heads, 
+        mlp_dim, 
+        pool = 'cls', 
+        channels = 3, 
+        dim_head = 64, 
+        dropout = 0., 
+        emb_dropout = 0.):
         super().__init__()
         assert image_size % patch_size == 0, 'Image dimensions must be divisible by the patch size.'
         num_patches = (image_size // patch_size) ** 2

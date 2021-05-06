@@ -2,7 +2,7 @@ import math
 import torch
 from torch import nn
 
-from vit import Transformer
+from model.vit import Transformer
 from einops import rearrange, repeat
 from einops.layers.torch import Rearrange
 
