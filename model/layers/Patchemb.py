@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+from einops import rearrange, repeat
+from einops.layers.torch import Rearrange
 
 class Patch_Linear_emb(nn.Module):
     def __init__(
