@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 import torch
 import torch.nn.functional as F
 from torch import nn, einsum
@@ -11,10 +8,7 @@ from torch import nn, einsum
 from einops import rearrange, repeat
 from einops.layers.torch import Rearrange
 
-from layers.AttentionLayer import PreNorm, FeedForward
-
 # helpers
-
 def exists(val):
     return val is not None
 

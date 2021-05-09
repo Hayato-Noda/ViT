@@ -11,8 +11,8 @@ import torch.nn.functional as F
 from einops import rearrange, repeat
 from einops.layers.torch import Rearrange
 
-from layers.Patch-emb import Patch_Linear_emb
-from layers.AttentionLayer import PreNorm, FeedForward
+from model.layers.Patchemb import Patch_Linear_emb
+from model.layers.AttentionLayer import PreNorm, FeedForward
 
 # helpers
 

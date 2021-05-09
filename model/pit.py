@@ -6,8 +6,8 @@ import torch.nn.functional as F
 from einops import rearrange, repeat
 from einops.layers.torch import Rearrange
 
-from layers.depthwiseconv2d import Pool
-from layers.pittransformer import Transformer
+from model.layers.depthwiseconv2d import Pool
+from model.layers.pittransformer import Transformer
 
 # helpers
 
@@ -65,10 +65,11 @@ class PiT(nn.Module):
                 dim *= 2
 
         self.layers = nn.Sequential(
-            *layers,
+            *layers)
+            
+        self.to_latent = nn.Sequential(
             nn.LayerNorm(dim),
-            nn.Linear(dim, num_classes)
-        )
+            nn.Linear(dim, num_classes))
 
     def forward(self, img):
         x = self.to_patch_embedding(img)
@@ -78,5 +79,8 @@ class PiT(nn.Module):
         x = torch.cat((cls_tokens, x), dim=1)
         x += self.pos_embedding
         x = self.dropout(x)
+        
+        x = self.layers(x)
+        x = x[:, 0]
 
-        return self.layers(x)
+        return self.to_latent(x)
