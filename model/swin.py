@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 import torch
 from torch import nn, einsum
 import numpy as np

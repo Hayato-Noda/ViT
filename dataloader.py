@@ -11,13 +11,11 @@ class set_transforms():
     super().__init__()
     self.batch_size = batch_size
     self.size = size
-  
 
     if name == 'Cifar10':
-      self._Cifar10download()
-    else:
-      self._Imagenet1kdownload()
-
+        self._Cifar10download()
+    elif name =='Cifar100':
+        self._Cifar100download()
 
   def _Cifar10download(self):
     train_transforms = transforms.Compose([
@@ -52,7 +50,7 @@ class set_transforms():
     
     return self
 
-  def _Imagenet1kdownlaod():
+  def _Cifar100download(self):
     train_transforms = transforms.Compose([
         transforms.Resize((self.size, self.size)),
         transforms.RandomResizedCrop(self.size),
@@ -71,17 +69,17 @@ class set_transforms():
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor()])
     
-    self.trainset = datasets.ImageNet(
-        root='./data',
+    self.trainset = datasets.CIFAR100(
+        root='./data/Cifar100',
         train=True,
-        download=False, 
-        transform=self.train_transforms)
+        download=False,
+        transform=train_transforms)
     
-    self.testset = datasets.ImageNet(
-        root='./data',
+    self.testset = datasets.CIFAR100(
+        root='./data/Cifar100',
         train=False,
         download=False,
-        transform=self.val_transforms)
+        transform=val_transforms)
     
     return self
 

@@ -19,3 +19,10 @@ def seed_everything(seed):
     torch.cuda.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.deterministic = True
+    
+#ModelParameterのCount
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters())
+
+def count_trainable_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
